@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './index.css'; // Import the Tailwind CSS file
-import MovieCard from '../src/components/MovieCard';
-import api from '../src/utils/api';
+import MovieCard from './components/MovieCard';
+import api from './utils/api';
 import App from './App';
 
 const Home = () => {
