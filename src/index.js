@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import MovieCard from './components/MovieCard';
-import api from './utils/api';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const Home = () => {
-  const [topMovies, setTopMovies] = useState([]);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-  useEffect(() => {
-    // Fetch top 10 movies
-    api.fetchTopMovies()
-      .then((data) => setTopMovies(data))
-      .catch((error) => console.error(error));
-  }, []);
-
-  return (
-    <div>
-      <h1>Top 10 Movies</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {topMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Home;
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

@@ -30,7 +30,9 @@ const SearchBar = ({ onSearch }) => {
     <div>
       <input
         type="text"
-        placeholder="Search for movies..."
+        placeholder="what do you want to watch?"
+        class=" font-bold relative m-0 -mr-px block w-[100%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-clip-padding px-3 py-2 text-base text-md text-black outline-none transition duration-300 ease-in-out focus:border-primary focus:text-black focus:shadow-te-primary focus:outline-none dark:text-black dark:placeholder:text-black"
+
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
