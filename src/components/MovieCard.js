@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MovieDetails from "../components/MovieDetails";
+
 
 
 const MovieCard = ({ movie }) => {
   return (
-    <Link to={`/movie/${movie.id}`} className="no-underline">
+    <Link to={`/movie/${movie.id}`} component={MovieDetails} className="no-underline">
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
     <img
       src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

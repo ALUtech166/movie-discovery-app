@@ -3,12 +3,13 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import "./index.css"; // Import the Tailwind CSS file
 import MovieCard from "../src/components/MovieCard";
+
 import api from "../src/utils/api";
 import SearchBar from "../src/components/SearchBar";
 
 function App() {
   const [topMovies, setTopMovies] = useState([]);
-  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     // Fetch top 10 movies
@@ -19,9 +20,15 @@ function App() {
   }, []);
 
   // Define a function to handle search result selection
-  const handleSearchResultSelect = (movieId) => {
-    // Do something with the selected movie ID, e.g., display details
-    setSelectedMovieId(movieId);
+  const handleMovieSelect = (movieId) => {
+    // Fetch movie details by ID and update selectedMovie state
+    api.fetchMovieDetails(movieId)
+      .then((data) => {
+        setSelectedMovie(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -34,16 +41,10 @@ function App() {
           <div class="flex justify-center">
             <div class="relative flex w-full flex-wrap items-stretch">
               {/* Render the SearchBar component and pass the handleSearchResultSelect function */}
-              <SearchBar onSearch={handleSearchResultSelect} />
+              <SearchBar onSearch={handleMovieSelect } />
 
-              {/* Display selected movie details */}
-              {selectedMovieId && (
-                <div>
-                  <h2>Selected Movie</h2>
-                  {/* Render the selected movie details here */}
-                  {/* You can fetch and display the movie details based on the selectedMovieId */}
-                </div>
-              )}
+               {/* Render MovieCard with selected movie details */}
+             {selectedMovie && <MovieCard movie={selectedMovie} />}
               
             </div>
           </div>
@@ -102,6 +103,8 @@ function App() {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
+
+      
     </div>
   );
 }
