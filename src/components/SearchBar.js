@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
 
+
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -27,26 +28,46 @@ const SearchBar = ({ onSearch }) => {
   }, [query]);
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="what do you want to watch?"
-        class=" font-bold relative m-0 -mr-px block w-[100%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-clip-padding px-3 py-2 text-base text-md text-black outline-none transition duration-300 ease-in-out focus:border-primary focus:text-black focus:shadow-te-primary focus:outline-none dark:text-black dark:placeholder:text-black"
 
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+// ...
 
-      {isLoading && <div>Loading...</div>}
+<div>
+  <div className="relative">
+    <input
+      type="text"
+      placeholder="What do you want to watch?"
+      className="font-bold bg-transparent m-0 block w-[100%] min-w-0 flex-auto rounded-l border border-solid-5 border-white-900 bg-clip-padding px-4 py-2 text-base text-md text-black outline-none transition duration-300 ease-in-out focus:border-black focus:text-white focus:shadow-te-black focus:outline-none dark:text-black dark:placeholder:text-black pl-10" // Add left padding for the search icon
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+    />
+    <div className="absolute inset-y-0 right-0 flex items-center pr-6 text-white pointer-events-none">
+   
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="h-5 w-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                 </div>
+  </div>
 
-      <ul>
-        {searchResults.map((result) => (
-          <li key={result.id} onClick={() => onSearch(result.id)}>
-            {result.title}
-          </li>
-        ))}
-      </ul>
-    </div>
+  {isLoading && <div>Loading...</div>}
+
+  <ul>
+    {searchResults.map((result) => (
+      <li key={result.id} onClick={() => onSearch(result.id)}>
+        {result.title}
+      </li>
+    ))}
+  </ul>
+</div>
+
   );
 };
 
