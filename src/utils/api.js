@@ -25,6 +25,25 @@ const api = {
     const data = await response.json();
     return data;
   },
+
+  // Function to fetch genres
+fetchGenres: async () => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch genres');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 };
 
 export default api;

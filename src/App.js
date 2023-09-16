@@ -10,12 +10,15 @@ import SearchBar from "../src/components/SearchBar";
 function App() {
   const [topMovies, setTopMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     // Fetch top 10 movies
     api
       .fetchTopMovies()
-      .then((data) => setTopMovies(data))
+      .then((data) => {
+        setTopMovies(data);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -39,7 +42,7 @@ function App() {
             <img class="w-36" src="/Logo.png" />
           </strong>
           <div class="flex justify-center">
-            <div class="relative flex w-full flex-wrap items-stretch">
+            <div class="relative flex w-full flex-wrap items-stretch text-white">
               {/* Render the SearchBar component and pass the handleSearchResultSelect function */}
               <SearchBar onSearch={handleMovieSelect } />
 

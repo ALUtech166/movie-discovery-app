@@ -7,6 +7,7 @@ import api from "../utils/api";
 const MovieDetails = () => {
   const { id } = useParams(); // Get the movie ID from the URL parameter
   const [movieDetails, setMovieDetails] = useState(null);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     // Fetch movie details based on the ID
@@ -14,6 +15,7 @@ const MovieDetails = () => {
       .fetchMovieDetails(id)
       .then((data) => {
         setMovieDetails(data);
+        setGenres(data.genres);
       })
       .catch((error) => {
         console.error(error);
@@ -25,7 +27,7 @@ const MovieDetails = () => {
   }
 
   return (
-    <div className="flex gap-4 lg:m-24">
+    <div className="flex gap-4 lg:mx-12 lg:m-12">
       {/* Sidebar Menu */}
       <div className="w-1/5 bg-white p-6 text-black border-r-2 border-b-2 border-t-2 rounded-r-[100px]">
         <div className="text-center mb-4">
@@ -54,11 +56,10 @@ const MovieDetails = () => {
             <button className="bg-red-200 text-white px-4 py-2 text-sm mt-4 rounded-full">
               Start Playing
             </button>
-
           </button>
           <li className="mt-36 flex gap-2 items-center">
-          <img className="w-7" src="/Logout.png" />
-         
+            <img className="w-7" src="/Logout.png" />
+
             <button className="text-left">Logout</button>
           </li>
         </ul>
@@ -83,38 +84,58 @@ const MovieDetails = () => {
             <div className="text-center mt-4 flex gap-2 items-center">
               <h2 className="text-md">{movieDetails.title}</h2>
               <span className="text-2xl items-center">.</span>
-              <p className="text-gray-600">
+              <p className="text-black">
                 {new Date(movieDetails.release_date).getFullYear()}
               </p>
               <span className="text-2xl items-center">.</span>
-              <p className="text-gray-600">{movieDetails.media_type}</p>
-              <p className="text-gray-600">{movieDetails.genre_ids}</p>
+              <p className="text-black">PG-13</p>
+              <span className="text-2xl items-center">.</span>
+              <p className="text-black">{movieDetails.runtime} min</p>
+              <span className="text-2xl items-center">.</span>
+              <div className="text-sm flex gap-1">
+                {genres &&
+                  genres.map((genre) => (
+                    <button
+                      key={genre.id}
+                      className="bg-red-100 text-red-600 px-4 py-2 text-sm rounded-lg border-red-200 border mr-2 mb-2"
+                    >
+                      {genre.name}
+                    </button>
+                  ))}
+              </div>
             </div>
             <p className="text-justify mb-4">{movieDetails.overview}</p>
-            <p className="text-gray-600 mb-4">
-              Director: {movieDetails.directors}
+            <p className="text-black mb-4">
+              Director: <span className="text-red-600">Joseph Kosinki</span>
             </p>
-            <p className="text-gray-600 mb-4">
-              Writers: {movieDetails.writers}
+            <p className="text-black mb-4">
+              Writers:{" "}
+              <span className="text-red-600">
+                Jim Cash, Jack Epps Jr, Peter Craig
+              </span>
             </p>
-            <p className="text-gray-600 mb-4">Stars: {movieDetails.stars}</p>
-            <div className="rounded-lg border-black mt-24 flex">
+            <p className="text-black mb-4">
+              Stars:{" "}
+              <span className="text-red-600">
+                Tom Cruise, Jennifer Connelly, Miles Teller
+              </span>
+            </p>
+            <div className="rounded-lg border-black mt-20 flex">
               <button className="bg-red-600 text-white px-4 py-2 text-sm rounded-lg">
                 Top Rated Movie #65
               </button>
               <button className="bg-transparent text-sm flex gap-4 text-black px-8 py-2 rounded-lg border">
                 <span>Awards 9 nominations</span>
                 <img className="w-5" src="/Expand.png" />
-
               </button>
             </div>
           </div>
 
           <div className="w-1/2 flex flex-col">
             <p className="flex gap-2 mt-4 flex-row justify-end text-right mx-24">
-            <img className="w-5" src="/Star.png" />
-            <span className="text-gray-300 text-sm">8.5</span>
-            <span className="text-sm">| 350k</span>
+              <img className="w-5" src="/Star.png" />
+              <span className="text-gray-300 text-sm">8.5</span>
+              <span className="text-sm">| 350k</span>
             </p>
             <button className="bg-red-600 text-md flex gap-2 items-center text-white px-24 text-center py-2 rounded-lg mt-2">
               <img className="w-8" src="/Tickets.png" />
