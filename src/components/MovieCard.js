@@ -8,22 +8,29 @@ const MovieCard = ({ movie }) => {
   return (
     <Link to={`/movie/${movie.id}`} component={MovieDetails} className="no-underline">
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-    <img
-      src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-      alt={movie.title}
-      className="w-full h-64 object-cover relative"
-      data-testid="movie-poster"
-    />
+    <div className="relative text-center">
+          { <img
+            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            alt={movie.title}
+            className="w-full h-72 object-cover rounded-lg"
+          />}
+          <div className="absolute inset-0 top-2 left-60 right-2">
+            <img className='w-10' src='/Favorite.png'/>
+          </div>
+        </div>
+
+
+
     <div className="p-4">
       <p className="text-gray-600" data-testid="movie-release-date">
-      {movie.release_year}
+      {new Date(movie.release_date).getFullYear()}
       </p>
       <h2 className="text-md font-semibold" data-testid="movie-title">
         {movie.title}
       </h2>
 
-      <h2 className="text-xl font-semibold" data-testid="movie-category">
-        {movie.type}
+      <h2 className="text-xl font-semibold text-gray-600">
+        {movie.adult}
       </h2>
 
       <div className="flex gap-8 pt-4 items-center text-sm">
