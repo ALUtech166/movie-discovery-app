@@ -107,6 +107,29 @@ function App() {
         ))}
       </div>
 
+
+      <footer className="bg-white py-4">
+      <div className="flex justify-center space-x-4">
+        {/* Social Media Icons */}
+        <a href="#" className="text-black hover:text-blue-500">
+        <img class="w-36" src="/Social.png" />
+
+        </a>
+    
+      </div>
+
+      <div className="flex justify-center space-x-4 pt-2 text-sm">
+        {/* Three Words */}
+        <p className="text-black font-bold">Conditions of Use</p>
+        <p className="text-black font-bold">Privacy & Policy</p>
+        <p className="text-black font-bold">Press Room</p>
+        </div>
+        <div className="flex justify-center space-x-4 pt-2 text-sm">
+        {/* Copyright Notice */}
+        <p className="text-black">© 2021 MovieBox by Adriana Eka Prayudha  </p>
+        </div>
+    </footer>
+
       
     </div>
   );
