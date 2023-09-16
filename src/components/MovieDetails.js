@@ -72,7 +72,7 @@ const MovieDetails = () => {
             <img
               src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
               alt={movieDetails.title}
-              className="w-full h-72 object-cover rounded-lg"
+              className="w-full h-96 shadow-2xl object-cover rounded-lg"
             />
           }
           <div className="absolute inset-0 flex items-center justify-center">
